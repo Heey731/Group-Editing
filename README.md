@@ -12,7 +12,7 @@
 
 <p>
   <a href="https://arxiv.org/abs/your-paper-id"><img src="https://img.shields.io/badge/ArXiv-coming_soon-red"></a>
-  <a href="https://your-project-page"><img src="https://img.shields.io/badge/Project-Page-green"></a>
+  <a href="https://heey731.github.io/group-editing-page/"><img src="https://img.shields.io/badge/Project-Page-green"></a>
 </p>
 
 </div>
