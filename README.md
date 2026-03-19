@@ -9,7 +9,7 @@
 
 [Yue Ma](placeholder_url), [Xinyu Wang](placeholder_url), [Qianli Ma](placeholder_url), [Qinghe Wang](placeholder_url), [Mingzhe Zheng](placeholder_url), [Xiangpeng Yang](placeholder_url), [Hao Li](placeholder_url), [Chongbo Zhao](placeholder_url), [Jixuan Ying](placeholder_url), [Hongyu Liu](placeholder_url), [Qifeng Chen](placeholder_url)
 
-<strong>Research Project</strong>
+<strong>is Accepted by CVPR 2026</strong>
 
 <a href='#'><img src='https://img.shields.io/badge/ArXiv-coming_soon-red'></a>
 <a href='https://group-editing.github.io/group-editing/'><img src='https://img.shields.io/badge/Project-Page-Green'></a>
