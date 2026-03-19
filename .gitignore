@@ -23,6 +23,7 @@ dist/
 *.avi
 *.mkv
 *.webm
+*.m4v
 
 # ------------------------------
 # Model weights (do not upload)

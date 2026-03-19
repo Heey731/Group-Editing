@@ -208,7 +208,7 @@ if __name__ == "__main__":
 
     model_root = os.environ.get(
         "VGGT_MODEL_ROOT",
-        ".model/facebook/models--facebook--VGGT-1B",
+        "./models/facebook/models--facebook--VGGT-1B",
     )
     model = load_vggt_model(model_root, device)
     folder_path = "./test-data/Gemini-out-expand-5"

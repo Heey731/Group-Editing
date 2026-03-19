@@ -1,18 +1,24 @@
 <div align="center">
-<h2><font color="red">Group Editing</font>: Edit Multiple Images in One Go</h2>
+<!-- 左侧：Logo + Group Editing 组合 -->
+<p align="center">
+  <img src="docs/logo.png" alt="Group Editing Logo" width="92" style="vertical-align:middle;">
+  <img src="docs/group-editing-wordmark.svg" alt="Group Editing" width="300" style="vertical-align:middle;">
+</p>
+
+<h2><span style="color:#FFFFFF;">Group Editing: Edit Multiple Images in One Go</span></h2>
 
 [Yue Ma](placeholder_url), [Xinyu Wang](placeholder_url), [Qianli Ma](placeholder_url), [Qinghe Wang](placeholder_url), [Mingzhe Zheng](placeholder_url), [Xiangpeng Yang](placeholder_url), [Hao Li](placeholder_url), [Chongbo Zhao](placeholder_url), [Jixuan Ying](placeholder_url), [Hongyu Liu](placeholder_url), [Qifeng Chen](placeholder_url)
 
 <strong>Research Project</strong>
 
-<a href='https://arxiv.org/abs/your-paper-id'><img src='https://img.shields.io/badge/ArXiv-coming_soon-red'></a>
-<a href='https://heey731.github.io/group-editing-page/'><img src='https://img.shields.io/badge/Project-Page-Green'></a>
-[![GitHub](https://img.shields.io/github/stars/your-org/Group-Edit?style=social)](https://github.com/your-org/Group-Edit)
+<a href='#'><img src='https://img.shields.io/badge/ArXiv-coming_soon-red'></a>
+<a href='https://group-editing.github.io/group-editing/'><img src='https://img.shields.io/badge/Project-Page-Green'></a>
+[![GitHub](https://img.shields.io/github/stars/Heey731/Group-Editing?style=social)](https://github.com/Heey731/Group-Editing)
 
 </div>
 
 ## 🎏 Abstract
-<b>TL; DR: <font color="red">Group Editing</font> enables consistent editing across multiple images in one go by combining pseudo-video modeling with explicit geometry cues.</b>
+<b>TL; DR: Group Editing enables consistent editing across multiple images in one go by combining pseudo-video modeling with explicit geometry cues.</b>
 
 <details><summary>CLICK for the full abstract</summary>
 
@@ -22,7 +28,8 @@
 
 ## 📀 Demo Video
 
-Demo videos and visual comparisons will be released soon.
+Please view the demo videos, visual comparisons, and qualitative results on the
+[Project Page](https://group-editing.github.io/group-editing/).
 
 ## 📋 Changelog
 
@@ -75,7 +82,7 @@ This project needs several checkpoints from Hugging Face / ModelScope plus your 
 | VGGT | `facebook/VGGT-1B` | `./models/facebook/models--facebook--VGGT-1B` | `vggt/infer-out-from-video-4frame.py` |
 | Wan VACE 14B shards | `Wan-AI/Wan2.1-VACE-14B` | `./models/Wan-AI/Wan2.1-VACE-14B` | `infer-test.py` |
 | Wan converted T5/VAE | `DiffSynth-Studio/Wan-Series-Converted-Safetensors` | `./models/DiffSynth-Studio/Wan-Series-Converted-Safetensors` | `infer-test.py` |
-| Group-Edit LoRA | your trained checkpoint | `./models/epoch-9.safetensors` | `infer-test.py` |
+| Group-Edit LoRA | project-specific LoRA checkpoint | `./models/epoch-9.safetensors` | `infer-test.py` |
 
 ### Download from Hugging Face (for GroundingDINO / SAM / VGGT)
 
@@ -103,6 +110,7 @@ modelscope download --model DiffSynth-Studio/Wan-Series-Converted-Safetensors \
 ```
 
 > Note: `infer-test.py` currently uses `ckpt_path` at line 45. Please set it to your local LoRA checkpoint path before running.
+> The Group-Edit LoRA checkpoint is not included in this repository and will be released later.
 
 ## ⚔️ Group Editing Inference
 
@@ -116,7 +124,7 @@ python utils/process-origin2mask.py
 python utils/process-mask2input.py
 
 # 3) Extract VGGT tokens
-# Optional: export VGGT_MODEL_ROOT=./.model/facebook/models--facebook--VGGT-1B
+# Optional: export VGGT_MODEL_ROOT=./models/facebook/models--facebook--VGGT-1B
 python vggt/infer-out-from-video-4frame.py
 
 # 4) Compute flow tensors from masks
