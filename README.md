@@ -1,308 +1,221 @@
 <div align="center">
-
 <h2><font color="red">Group Editing</font>: Edit Multiple Images in One Go</h2>
 
-<p>
-  <a href="https://github.com/your-org/your-repo"><img src="https://img.shields.io/badge/Code-GitHub-black"></a>
-  <a href="https://github.com/your-org/your-repo/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-blue"></a>
-  <img src="https://img.shields.io/badge/Python-3.10+-brightgreen">
-  <img src="https://img.shields.io/badge/PyTorch-2.0+-ee4c2c">
-  <img src="https://img.shields.io/badge/Status-Research%20Code-orange">
-</p>
+[Yue Ma](placeholder_url), [Xinyu Wang](placeholder_url), [Qianli Ma](placeholder_url), [Qinghe Wang](placeholder_url), [Mingzhe Zheng](placeholder_url), [Xiangpeng Yang](placeholder_url), [Hao Li](placeholder_url), [Chongbo Zhao](placeholder_url), [Jixuan Ying](placeholder_url), [Hongyu Liu](placeholder_url), [Qifeng Chen](placeholder_url)
 
-<p>
-  <a href="https://arxiv.org/abs/your-paper-id"><img src="https://img.shields.io/badge/ArXiv-coming_soon-red"></a>
-  <a href="https://heey731.github.io/group-editing-page/"><img src="https://img.shields.io/badge/Project-Page-green"></a>
-</p>
+<strong>Research Project</strong>
+
+<a href='https://arxiv.org/abs/your-paper-id'><img src='https://img.shields.io/badge/ArXiv-coming_soon-red'></a>
+<a href='https://heey731.github.io/group-editing-page/'><img src='https://img.shields.io/badge/Project-Page-Green'></a>
+[![GitHub](https://img.shields.io/github/stars/your-org/Group-Edit?style=social)](https://github.com/your-org/Group-Edit)
 
 </div>
 
----
-
-> **TL;DR**: Group Editing is a framework for consistent multi-image editing that combines pseudo-video modeling, VGGT-based geometric correspondence, and Wan-VACE generation.
-
----
-
 ## 🎏 Abstract
-Editing a group of related images consistently is challenging due to viewpoint changes, pose variation, and spatial misalignment.  
+<b>TL; DR: <font color="red">Group Editing</font> enables consistent editing across multiple images in one go by combining pseudo-video modeling with explicit geometry cues.</b>
 
-**Group Editing** reformulates image groups as pseudo-temporal sequences, enabling video generative priors to enforce implicit consistency. To strengthen explicit alignment, we integrate dense geometric correspondence extracted from VGGT features. We further introduce:
+<details><summary>CLICK for the full abstract</summary>
 
-- **Ge-RoPE**: geometry-enhanced positional encoding for cross-view spatial alignment,
-- **Identity-RoPE**: identity-aware positional encoding for stable subject consistency.
+> Editing a set of related images with consistent subject identity, style, and structure is challenging due to viewpoint and pose variation. Group Editing reformulates multiple images as a pseudo-temporal sequence and leverages a video-generation prior to improve global consistency. To further enhance cross-view alignment, we integrate VGGT-based geometric correspondence and flow cues into the generation process. Our implementation uses a practical 5-stage pipeline, including mask extraction, input conversion, VGGT token extraction, flow estimation, and final Wan-VACE based generation. This repository provides the research code and engineering pipeline for reproducible group editing experiments.
 
-In practice, this repository provides a modular 5-stage pipeline (mask -> input formatting -> VGGT token extraction -> flow estimation -> final generation) that supports reproducible experiments and practical deployment.
+</details>
 
----
+## 📀 Demo Video
 
-## 🧠 Core Contributions
-
-1. **Pseudo-video formulation for image groups**
-- Treats multi-image editing as sequence modeling
-- Leverages video diffusion priors for coherence
-
-2. **Explicit geometric correspondence with VGGT**
-- Extracts geometry-aware features across views
-- Provides robust alignment cues for editing
-
-3. **Dual positional alignment design**
-- **Ge-RoPE** for geometric consistency
-- **Identity-RoPE** for subject/identity preservation
-
-4. **Engineering-friendly modular pipeline**
-- Clear stage boundaries for debugging and ablations
-- Compatible with Wan-VACE + LoRA workflow
-
----
-
-## ✨ Features
-
-- **Consistent group editing** across multiple images/frames
-- **Hybrid alignment**: implicit temporal priors + explicit geometry priors
-- **Mask-aware subject control** via GroundingDINO + SAM
-- **Geometry-guided generation** via VGGT tokens + flow tensors
-- **LoRA-based adaptation** for custom editing behavior
-- **Script-level modularity** for fast experimentation
-
----
+Demo videos and visual comparisons will be released soon.
 
 ## 📋 Changelog
 
-- 2026.03 Public open-source README release
-- 2026.03 Integrated paper-level method description with practical usage guide
-- 2026.03 Added path and troubleshooting sections for reproducibility
-
----
+- 2026.03 Initial public release of Group-Edit codebase
 
 ## 🚧 Todo
 
-- [ ] Add demo GIFs / benchmark visualizations
-- [ ] Add one-command launcher for the full pipeline
-- [ ] Add YAML/JSON config system to replace hard-coded paths
-- [ ] Add batch inference examples
-- [ ] Add training/fine-tuning documentation
+- [ ] Release more demo videos and cases
+- [ ] Add one-command pipeline launcher
+- [ ] Add config-driven path management (YAML/JSON)
+- [ ] Add cleaner benchmark/evaluation scripts
+- [ ] Release training details and model cards
 
----
+## ✨ Features
 
-## 🛡 Environment Setup
+- **Group-level consistent editing** across multiple input images
+- **Pseudo-video reformulation** for improved temporal-like coherence
+- **VGGT-based geometry guidance** for better correspondence alignment
+- **Mask-aware subject editing** using GroundingDINO + SAM
+- **Flow-guided generation** with multi-stage preprocessing
+- **Wan-VACE + LoRA integration** for controllable generation
 
-### Option A (Recommended)
+## 🛡 Setup Environment
 
 ```bash
-conda create -n group-edit python=3.10 -y
+# Create conda environment
+conda create -n group-edit python=3.10
 conda activate group-edit
 
-cd Group-Editing
+# Install dependencies
+cd Group-Edit
 pip install -r requirements.txt
-pip install -e .
-```
-
-### Option B (From `environment.yml`)
-
-```bash
-# If environment.yml contains a machine-specific prefix, remove/adjust it first.
-conda env create -f environment.yml
-conda activate group-edit
 ```
 
 ### Requirements
 
 - Python 3.10+
 - PyTorch 2.0+
-- CUDA-enabled GPU
-- ffmpeg (recommended for stable video I/O)
-- High VRAM recommended for Wan2.1-VACE-14B
+- CUDA-compatible GPU
+- Recommended: 24GB+ VRAM (higher VRAM provides smoother inference)
 
----
+## 📥 Model Download
 
-## 📥 Model Preparation
+This project needs several checkpoints from Hugging Face / ModelScope plus your project LoRA.
 
-Prepare the following checkpoints before running:
+| Component | Model ID / Source | Local Target Directory | Used In |
+|---|---|---|---|
+| Grounding DINO | `IDEA-Research/grounding-dino-base` | `./models/IDEA-Research/grounding-dino-base` | `utils/process-origin2mask.py` |
+| SAM | `facebook/sam-vit-huge` | `./models/facebook/sam-vit-huge` | `utils/process-origin2mask.py` |
+| VGGT | `facebook/VGGT-1B` | `./models/facebook/models--facebook--VGGT-1B` | `vggt/infer-out-from-video-4frame.py` |
+| Wan VACE 14B shards | `Wan-AI/Wan2.1-VACE-14B` | `./models/Wan-AI/Wan2.1-VACE-14B` | `infer-test.py` |
+| Wan converted T5/VAE | `DiffSynth-Studio/Wan-Series-Converted-Safetensors` | `./models/DiffSynth-Studio/Wan-Series-Converted-Safetensors` | `infer-test.py` |
+| Group-Edit LoRA | your trained checkpoint | `./models/epoch-9.safetensors` | `infer-test.py` |
 
-| Component | Model | Stage |
-|---|---|---|
-| Detection | `IDEA-Research/grounding-dino-base` | Mask extraction |
-| Segmentation | `facebook/sam-vit-huge` | Mask extraction |
-| Geometry token model | `facebook/VGGT-1B` | VGGT extraction |
-| Video backbone | `Wan-AI/Wan2.1-VACE-14B` (7 shards) | Final inference |
-| Text/VAE weights | `DiffSynth-Studio/Wan-Series-Converted-Safetensors` | Final inference |
-| LoRA | `epoch-9.safetensors` (custom) | Final inference |
-
-### Notes
-
-- `VGGT-1B` may be stored in Hugging Face cache layout (`models--.../snapshots/<hash>`). The provided VGGT script supports this.
-- `infer-test.py` supports env overrides:
-  - `WAN_VACE_ROOT`
-  - `WAN_CONVERTED_ROOT`
-- If tokenizer files are missing, the pipeline may attempt to fetch `Wan-AI/Wan2.1-T2V-1.3B/google/*` automatically.
-
----
-
-## 📁 Data Format
-
-### Inputs
-
-- Source videos: `./test-data/Gemini-out/{id}-origin.mp4`
-- Subject metadata: `./test-data/gemini-test.json`
-
-Example JSON:
-
-```json
-[
-  {
-    "description": {"item": "fox"},
-    "image_filename": "351-origin.mp4"
-  }
-]
-```
-
-### Intermediate / Outputs
-
-- Mask video: `./test-data/Gemini-out/{id}-mask.mp4`
-- Formatted folder: `./test-data/Gemini-out-expand-5/`
-- VGGT tokens: `./test-data/Gemini-out-expand-5-vggt/{id}-origin_aggregated_tokens.npy`
-- Flow tensors: `./test-data/Gemini-out-expand-5-map/{id}-map.npy`
-- Final outputs: `./test-out/*.mp4`
-
----
-
-## ⚔️ Quick Start (End-to-End)
-
-Run from repository root:
+### Download from Hugging Face (for GroundingDINO / SAM / VGGT)
 
 ```bash
-# 1) Extract masks from origin videos
+python -m huggingface_hub download IDEA-Research/grounding-dino-base \
+  --local-dir ./models/IDEA-Research/grounding-dino-base
+
+python -m huggingface_hub download facebook/sam-vit-huge \
+  --local-dir ./models/facebook/sam-vit-huge
+
+python -m huggingface_hub download facebook/VGGT-1B \
+  --local-dir ./models/facebook/models--facebook--VGGT-1B
+```
+
+### Download Wan checkpoints (example with ModelScope)
+
+```bash
+# Wan VACE 14B
+modelscope download --model Wan-AI/Wan2.1-VACE-14B \
+  --local_dir ./models/Wan-AI/Wan2.1-VACE-14B
+
+# Wan converted safetensors (T5 + VAE)
+modelscope download --model DiffSynth-Studio/Wan-Series-Converted-Safetensors \
+  --local_dir ./models/DiffSynth-Studio/Wan-Series-Converted-Safetensors
+```
+
+> Note: `infer-test.py` currently uses `ckpt_path` at line 45. Please set it to your local LoRA checkpoint path before running.
+
+## ⚔️ Group Editing Inference
+
+#### Quick Start (5-stage pipeline)
+
+```bash
+# 1) Extract object masks from origin videos
 python utils/process-origin2mask.py
 
-# 2) Build formatted inputs
+# 2) Convert mask/origin videos to pipeline input format
 python utils/process-mask2input.py
 
-# 3) Compute VGGT token tensors
+# 3) Extract VGGT tokens
+# Optional: export VGGT_MODEL_ROOT=./.model/facebook/models--facebook--VGGT-1B
 python vggt/infer-out-from-video-4frame.py
 
-# 4) Compute flow tensors
+# 4) Compute flow tensors from masks
 python utils/2delta-batch-gpu-multi-frame.py
 
-# 5) Run final Wan-VACE + LoRA inference
+# 5) Run final generation
 python infer-test.py
 ```
 
----
+#### Input Data Format
 
-## ⚙️ Key Path Configuration
-
-Before running on a new machine, verify these scripts:
-
-1. `utils/process-origin2mask.py`
-- `JSON_FILE_PATH`
-- `VIDEO_DIR`
-- `detector_id`
-- `segmenter_id`
-
-2. `vggt/infer-out-from-video-4frame.py`
-- `VGGT_MODEL_ROOT` (env override supported)
-- `folder_path`
-
-3. `utils/2delta-batch-gpu-multi-frame.py`
-- `input_folder`
-
-4. `infer-test.py`
-- `video_base_path`
-- `ckpt_path` (LoRA)
-- `tasks`
-- `WAN_VACE_ROOT` / `WAN_CONVERTED_ROOT`
-
----
-
-## 🧪 Troubleshooting
-
-### 1) `config.json/model.safetensors not found` (VGGT)
-Cause: incorrect directory level (cache root vs snapshot) or incomplete download.  
-Fix: point to valid VGGT model root/snapshot.
-
-### 2) `ImportError` from `transformers.modeling_utils`
-Cause: transformers version mismatch.  
-Fix: use compatibility import patch in `diffsynth/models/stepvideo_text_encoder.py`.
-
-### 3) `No such file or directory` for Wan checkpoints
-Cause: path mismatch on new machine.  
-Fix: update defaults or set env vars (`WAN_VACE_ROOT`, `WAN_CONVERTED_ROOT`).
-
-### 4) CUDA initialization/runtime errors
-Cause: GPU visibility/driver/container mismatch.  
-Fix: verify `nvidia-smi`, CUDA runtime, and container launch settings.
-
----
+- Origin video: `./test-data/Gemini-out/<id>-origin.mp4`
+- Object description JSON: `./test-data/gemini-test.json`
+- Generated intermediate folders:
+  - `./test-data/Gemini-out-expand-5`
+  - `./test-data/Gemini-out-expand-5-vggt`
+  - `./test-data/Gemini-out-expand-5-map`
 
 ## 📁 Project Structure
 
+<details><summary>Click for directory structure</summary>
+
 ```text
-Group-Editing/
-├── diffsynth/                             # Core model and pipeline code
+Group-Edit/
+├── diffsynth/                         # Core diffusion framework
+│   ├── models/                        # Model definitions (Wan DiT/VACE, encoders, etc.)
+│   └── pipelines/                     # Pipeline implementations (wan_video_new.py)
 ├── utils/
-│   ├── process-origin2mask.py             # Stage 1: mask extraction
-│   ├── process-mask2input.py              # Stage 2: input formatting
-│   └── 2delta-batch-gpu-multi-frame.py    # Stage 4: flow computation
+│   ├── process-origin2mask.py         # Stage-1 mask extraction (GroundingDINO + SAM)
+│   ├── process-mask2input.py          # Stage-2 input conversion
+│   └── 2delta-batch-gpu-multi-frame.py# Stage-4 flow tensor extraction
 ├── vggt/
-│   └── infer-out-from-video-4frame.py     # Stage 3: VGGT extraction
-├── infer-test.py                          # Stage 5: final inference
-├── test-data/                             # Inputs and intermediates
-├── models/                                # LoRA and local checkpoints
+│   └── infer-out-from-video-4frame.py # Stage-3 VGGT token extraction
+├── infer-test.py                      # Stage-5 final inference
+├── models/                            # Local checkpoints (ignored by git)
+├── test-data/                         # Local data and intermediate files (optional)
 ├── requirements.txt
-└── setup.py
+└── README.md
 ```
 
----
+</details>
 
-## 🔧 Reproducibility Checklist
+## 🔧 Key Modifications
 
-- [ ] Model paths are valid on your machine
-- [ ] Input naming follows `{id}-origin.mp4`
-- [ ] `gemini-test.json` fields are correct
-- [ ] Stage outputs exist before next stage
-- [ ] GPU memory is sufficient for selected model variant
+This repository is built on top of DiffSynth-Studio and includes project-specific edits for Group Editing:
 
----
+### 1. `infer-test.py`
+
+- Integrates LoRA loading for Wan-VACE pipeline
+- Loads and injects VGGT tokens (`vggt_tensor`) and flow tensors (`flow_tensor`)
+- Implements practical task loop for grouped editing generation
+
+### 2. `vggt/infer-out-from-video-4frame.py`
+
+- Adds masked-frame token extraction for video-style group inputs
+- Supports Hugging Face cache-style model root resolution (`snapshots/<revision>`)
+
+### 3. `utils/process-origin2mask.py` + `utils/2delta-batch-gpu-multi-frame.py`
+
+- Stage-1 object mask extraction with GroundingDINO and SAM
+- Stage-4 contour/TPS-based flow map generation for guidance
+
+### 4. `diffsynth/models/stepvideo_text_encoder.py`
+
+- Added import fallback for transformers API compatibility across versions:
+  - `from transformers import PretrainedConfig, PreTrainedModel`
+  - fallback to `configuration_utils` / `modeling_utils`
 
 ## 📍 Citation
 
-If you use this repository, please cite Group Editing and the upstream projects.
+If you use this code, please cite:
 
 ```bibtex
-@misc{group_editing_2026,
+@article{groupediting2026,
   title={Group Editing: Edit Multiple Images in One Go},
-  author={Your Name and Contributors},
-  year={2026},
-  howpublished={\url{https://github.com/your-org/your-repo}}
+  author={Ma, Yue and Wang, Xinyu and Ma, Qianli and Wang, Qinghe and Zheng, Mingzhe and Yang, Xiangpeng and Li, Hao and Zhao, Chongbo and Ying, Jixuan and Liu, Hongyu and Chen, Qifeng},
+  journal={arXiv preprint arXiv:XXXX.XXXXX},
+  year={2026}
 }
 ```
 
----
-
 ## 📜 License
 
-This project is released under the Apache-2.0 License.  
-See [LICENSE](./LICENSE) for details.
-
----
+This project is released under the Apache-2.0 License.
+See [LICENSE](LICENSE) for details.
 
 ## 💗 Acknowledgements
 
-This project builds upon and/or references:
+This repository builds upon:
 
 - [DiffSynth-Studio](https://github.com/modelscope/DiffSynth-Studio)
 - [Wan2.1](https://github.com/Wan-Video/Wan2.1)
 - [VGGT](https://github.com/facebookresearch/vggt)
-- [GroundingDINO](https://github.com/IDEA-Research/GroundingDINO)
-- [Segment Anything (SAM)](https://github.com/facebookresearch/segment-anything)
+- [Grounding DINO](https://github.com/IDEA-Research/GroundingDINO)
+- [Segment Anything](https://github.com/facebookresearch/segment-anything)
 
----
+Thanks to the original authors and communities for open-sourcing their work.
 
 ## 🧿 Maintenance
 
-This repository is released as research/engineering code.  
-If you encounter issues, please open an issue with:
-
-- full error logs,
-- environment information,
-- the exact stage command you executed.
+This repository is maintained for research and reproducibility.
+If you find issues or have suggestions, please open an issue or discussion thread.
