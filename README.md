@@ -60,8 +60,9 @@ Please view the demo videos, visual comparisons, and qualitative results on the
 conda create -n group-edit python=3.10
 conda activate group-edit
 
+git clone https://github.com/Heey731/Group-Editing.git
 # Install dependencies
-cd Group-Edit
+cd Group-Editing
 pip install -r requirements.txt
 ```
 
