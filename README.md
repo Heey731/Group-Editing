@@ -12,7 +12,7 @@
 <strong>is Accepted by CVPR 2026</strong>
 
 <a href='#'><img src='https://img.shields.io/badge/ArXiv-coming_soon-red'></a>
-<a href='https://group-editing.github.io/group-editing/'><img src='https://img.shields.io/badge/Project-Page-Green'></a>
+<a href='https://group-editing.github.io'><img src='https://img.shields.io/badge/Project-Page-Green'></a>
 [![GitHub](https://img.shields.io/github/stars/Heey731/Group-Editing?style=social)](https://github.com/Heey731/Group-Editing)
 
 </div>
