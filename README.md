@@ -34,6 +34,7 @@ Please view the demo videos, visual comparisons, and qualitative results on the
 ## 📋 Changelog
 
 - 2026.03 Initial public release of Group-Edit codebase
+- 2026.03 Released Group-Edit LoRA checkpoint `epoch-9.safetensors` on Hugging Face: https://huggingface.co/Heey731/group-editing
 
 ## 🚧 Todo
 
@@ -82,19 +83,19 @@ This project needs several checkpoints from Hugging Face / ModelScope plus your 
 | VGGT | `facebook/VGGT-1B` | `./models/facebook/models--facebook--VGGT-1B` | `vggt/infer-out-from-video-4frame.py` |
 | Wan VACE 14B shards | `Wan-AI/Wan2.1-VACE-14B` | `./models/Wan-AI/Wan2.1-VACE-14B` | `infer-test.py` |
 | Wan converted T5/VAE | `DiffSynth-Studio/Wan-Series-Converted-Safetensors` | `./models/DiffSynth-Studio/Wan-Series-Converted-Safetensors` | `infer-test.py` |
-| Group-Edit LoRA | project-specific LoRA checkpoint | `./models/epoch-9.safetensors` | `infer-test.py` |
+| Group-Edit LoRA | `Heey731/group-editing` (`epoch-9.safetensors`) | `./models/epoch-9.safetensors` | `infer-test.py` |
 
-### Download from Hugging Face (for GroundingDINO / SAM / VGGT)
+### Download core checkpoints (GroundingDINO / SAM / VGGT)
 
-```bash
-python -m huggingface_hub download IDEA-Research/grounding-dino-base \
-  --local-dir ./models/IDEA-Research/grounding-dino-base
+We use pretrained models from GroundingDINO, SAM, and VGGT.  
+Our method additionally requires a LoRA checkpoint, provided separately.
 
-python -m huggingface_hub download facebook/sam-vit-huge \
-  --local-dir ./models/facebook/sam-vit-huge
+```python
+from huggingface_hub import snapshot_download
 
-python -m huggingface_hub download facebook/VGGT-1B \
-  --local-dir ./models/facebook/models--facebook--VGGT-1B
+snapshot_download("IDEA-Research/grounding-dino-base", local_dir="./models/grounding-dino-base")
+snapshot_download("facebook/sam-vit-huge", local_dir="./models/sam-vit-huge")
+snapshot_download("facebook/VGGT-1B", local_dir="./models/VGGT-1B")
 ```
 
 ### Download Wan checkpoints (example with ModelScope)
@@ -109,8 +110,20 @@ modelscope download --model DiffSynth-Studio/Wan-Series-Converted-Safetensors \
   --local_dir ./models/DiffSynth-Studio/Wan-Series-Converted-Safetensors
 ```
 
+### Download Group-Edit LoRA checkpoint
+
+```python
+from huggingface_hub import hf_hub_download
+
+hf_hub_download(
+    repo_id="Heey731/group-editing",
+    filename="epoch-9.safetensors",
+    local_dir="./models"
+)
+```
+
 > Note: `infer-test.py` currently uses `ckpt_path` at line 45. Please set it to your local LoRA checkpoint path before running.
-> The Group-Edit LoRA checkpoint is not included in this repository and will be released later.
+> The released LoRA file is `./models/epoch-9.safetensors` (source: https://huggingface.co/Heey731/group-editing).
 
 ## ⚔️ Group Editing Inference
 
